@@ -18,7 +18,7 @@
     `$ cd ~/docker/geant4`
 4. To minimize the size of the Docker image the data files required by GEANT4 were not included, so you need to download them from the GEANT4 website and uncompress inside a ‘data’ directory in the shared folder: <br>
     `$ mkdir -p data` <br>
-    Go to this webpage (http://geant4.web.cern.ch/support/download_archive?page=1) and download and uncompress all the “Data files” inside the folder you just created (you can delete the compressed versions afterwards). In case you’re wandering how to decompress .tar or .tar.gz files: <br>
+    Go to this webpage (https://geant4.web.cern.ch/node/1604) and download and uncompress all the “Data files” inside the folder you just created (you can delete the compressed versions afterwards). In case you’re wandering how to decompress .tar or .tar.gz files: <br>
     `$ tar xvzf theFile.tar.gz` <br>
     or <br>
     `$ tar xvf theFile.tar`
