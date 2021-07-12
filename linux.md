@@ -24,7 +24,7 @@
     `$ tar xvf theFile.tar`
 5. In the end you should have something like this: <br>
     `$ pwd` <br>
-    _/Users/alex/docker/geant4_ <br>
+    _~/docker/geant4_ <br>
     `$ ls data` <br>
     _G4ABLA3.1 <br>
     G4ENSDFSTATE2.2 <br>
@@ -37,9 +37,7 @@
     PhotonEvaporation5.2 <br>
     RealSurface2.1.1_ <br>
 6. You can now get the Docker image containing GEANT4. Select one of the 2 available, depending on whether you want a more advanced (Qt) interface or not (the image with Qt requires 1.85 GB, while the other takes 1.45 GB): <br>
-    `$ docker pull alexlindote/geant4-qt` <br>
-    or <br>
-    `$ docker pull alexlindote/geant4`
+    `$ docker pull manuel97/geant4-qt:latest` <br>
 7. We are now ready to start the docker container. Download the two scripts in this folder (`setup_docker.sh` and `run_docker.sh`) to your `geant4` folder. Start the container by running: <br>
     `$ source setup_docker.sh` <br>
     Note that by default this script will use the Qt image, if you want to use the smaller one you'll need to edit the script before executing the above command removing ‘-qt’ references.
@@ -50,10 +48,13 @@
     You can exit and rejoin whenever you want, and even have multiple sessions open. As long as the container is running, all the changes you make will remain in place between sessions.
 10. Your local folder is shared under `/usershared`, so anything inside this folder is editable by your native system and inside the image. This also means that changes inside this folder are permanent.
 11. Let’s test GEANT4 using one of its examples, compile and run it: <br>
-    1. `$ cp -r /usr/local/geant4/geant4.10.04.p03-install/share/Geant4-10.4.3/examples/basic/B2/B2a /usershared/`
-    2. `$ cd /usershared/B2a`
-    3. `$ make`
-    4. `$ exampleB2a`
-    5. In the Qt window that opens, type `/run/beamOn 1` in the “Session” box at the bottom and press enter. You should see particle trajectories. Use the mouse to rotate, zoom in and out.
+    1. `$ cp -r /usr/local/geant4/geant4.10.04.p03-install/share/Geant4-10.4.3/examples /usershared/`
+    2. `$ cd /usershared/examples/basic/B2/B2a`
+    3. `$ mkdir build`
+    4. `$ cd build`
+    5. `$ cmake ..`
+    6. `$ make`
+    7. `$ ./exampleB2a`
+    8. In the Qt window that opens, type `/run/beamOn 1` in the “Session” box at the bottom and press enter. You should see particle trajectories. Use the mouse to rotate, zoom in and out.
     If you see an error about writing permissions when trying step 1. above, exit the container and edit the setup script to uncomment the line `#chmod -R a+rw .` -- then source the setup script again.
 12. That’s it! You are ready to run GEANT4 in your computer!
