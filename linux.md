@@ -36,7 +36,7 @@
     G4PII1.3 <br>
     PhotonEvaporation5.2 <br>
     RealSurface2.1.1_ <br>
-6. You can now get the Docker image containing GEANT4. Select one of the 2 available, depending on whether you want a more advanced (Qt) interface or not (the image with Qt requires 1.85 GB, while the other takes 1.45 GB): <br>
+6. You can now get the Docker image containing GEANT4: <br>
     `$ docker pull manuel97/geant4-qt:latest` <br>
 7. We are now ready to start the docker container. Download the two scripts in this folder (`setup_docker.sh` and `run_docker.sh`) to your `geant4` folder. Start the container by running: <br>
     `$ source setup_docker.sh` <br>
