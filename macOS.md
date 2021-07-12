@@ -34,17 +34,15 @@
     G4PII1.3 <br>
     PhotonEvaporation5.2 <br>
     RealSurface2.1.1_ <br>
-8. You can now get the Docker image containing GEANT4. Select one of the 2 available, depending on whether you want a more advanced (Qt) interface or not (the image with Qt requires 1.85 GB, while the other takes 1.45 GB): <br>
-    `$ docker pull alexlindote/geant4-qt` <br>
-    or <br>
-    `$ docker pull alexlindote/geant4`
+8. You can now get the Docker image containing GEANT4: <br>
+    `$ manuel97/geant4-qt:latest` <br>
 9. Before starting the docker container, find out your IP address and tell your computer to accept connections from it (sounds a bit like Inception, but this is needed to open the X11 windows) <br>
     `$ ifconfig`<br>
     (depending on whether you’re connected with an ethernet cable or using wireless your IP should be under en0 or en1, respectively, after inet) <br>
     `$ export IP=172.16.102.25` <br>
     `$ xhost + $IP`
 10. We are now ready to start the docker container: <br>
-    `$ docker run -it -d --name g4image -v /tmp/.X11-unix:/tmp/.X11-unix -v $PWD/:/usershared -e DISPLAY=$IP:0 alexlindote/geant4-qt` <br>
+    `$ docker run -it -d --name g4image -v /tmp/.X11-unix:/tmp/.X11-unix -v $PWD/:/usershared -e DISPLAY=$IP:0 manuel97/geant4-qt` <br>
     or, if you’re using the image with no Qt interface, just remove the final ‘-qt’
 11. You should now be able to see that the container is running with: <br>
     `$ docker ps`
@@ -53,11 +51,14 @@
     You can exit and rejoin whenever you want, and even have multiple sessions open. As long as the container is running, all the changes you make will remain in place between sessions.
 13. Your local folder is shared under `/usershared`, so anything inside this folder is editable by your Mac and inside the image. This also means that changes inside this folder are permanent.
 14. Let’s test GEANT4 using one of its examples, compile and run it: <br>
-    1. `$ cp -r /usr/local/geant4/geant4.10.04.p03-install/share/Geant4-10.4.3/examples/basic/B2/B2a /usershared/`
-    2. `$ cd /usershared/B2a`
-    3. `$ make`
-    4. `$ exampleB2a`
-    5. In the Qt window that opens, type `/run/beamOn 1` in the “Session” box at the bottom and press enter. You should see particle trajectories. Use the mouse to rotate, zoom in and out.
-    6. If you don’t see the Qt window, you may need to downgrade your XQuartz to v2.7.8 <br>
+    1. `$ cp -r /usr/local/geant4/geant4.10.04.p03-install/share/Geant4-10.4.3/examples /usershared/`
+    2. `$ cd /usershared/examples/basic/B2/B2a`
+    3. `$ mkdir build`
+    4. `$ cd build`
+    5. `$ cmake ..`
+    6. `$ make`
+    7. `$ ./exampleB2a`
+    8. In the Qt window that opens, type `/run/beamOn 1` in the “Session” box at the bottom and press enter. You should see particle trajectories. Use the mouse to rotate, zoom in and out.
+    If you don’t see the Qt window, you may need to downgrade your XQuartz to v2.7.8 <br>
     (probably you’re using Docker Toolbox in an older system)
 15. That’s it! You are ready to run GEANT4 in your computer!
